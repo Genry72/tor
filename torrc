@@ -1,0 +1,12 @@
+UseBridges 1
+
+# SocksPort 9050
+SocksPort 0.0.0.0:9050
+#Exitpolicy reject *:*
+# ExtORPort auto
+
+ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy managed
+
+Bridge obfs4 68.93.134.147:13581 5C3BA3A8661D0EEF6480F1C76CAC9692B00D45C5 cert=FDYyKp8vCiRYUgsGjgsZ7p6SoQmD6crOeQyJ1zhRSQgwPzHnx4dczx4ti12vaou5enClRA iat-mode=0
+Bridge obfs4 45.67.14.228:9991 D5FF85E36D2E643CC9CC962FAC01DD3403885340 cert=8qQywX4vZPjJ4d0gcc1ARIagiUcFgrpmP3C46Zpa5yyeHBPpMMOmeW4I+CAmBWeG0ft9Tg iat-mode=0
+Bridge obfs4 192.166.245.253:3480 1AF1FE3223E12BBF15556A2248FB09C903F87E11 cert=M8mUPEiar9874HcEFLFCQHy8w73w1U+4iYNo7m968pV8J+og4rmiiABUSqEiLAdN0/OmBg iat-mode=0
