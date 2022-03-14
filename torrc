@@ -5,6 +5,9 @@ SocksPort 0.0.0.0:9050
 #Exitpolicy reject *:*
 # ExtORPort auto
 
+AutomapHostsOnResolve 1
+DNSPort 10.8.0.1:53530
+
 ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy managed
 
 Bridge obfs4 68.93.134.147:13581 5C3BA3A8661D0EEF6480F1C76CAC9692B00D45C5 cert=FDYyKp8vCiRYUgsGjgsZ7p6SoQmD6crOeQyJ1zhRSQgwPzHnx4dczx4ti12vaou5enClRA iat-mode=0
