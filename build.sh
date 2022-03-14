@@ -5,4 +5,4 @@ docker rmi -f mytor
 #Билдим
 docker build -t mytor .
 #Стартуем
-docker run -it -p 8118:8118 -p 9050:9050 -p 3128:3128 -p 53530:53530 --restart unless-stopped --name tor -d mytor
+docker run -it -p 8118:8118 -p 9050:9050 -p 3128:3128 -p 53530:53530 -p 3129:3129 --restart unless-stopped --name tor -d mytor
