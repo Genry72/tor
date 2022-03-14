@@ -4,3 +4,4 @@ p.p
 kinozal.tv
 rutracker.org
 www.speedtest.net
+jsonip.com
