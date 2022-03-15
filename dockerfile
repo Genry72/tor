@@ -8,8 +8,6 @@ RUN apt install -y \
     curl net-tools mc telnet vim \
     tor \
     tor-geoipdb \
-    ##для dns
-    bind-dig \
     privoxy \
     squid3 \
     supervisor \
