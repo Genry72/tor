@@ -5,7 +5,9 @@ TransPort 0.0.0.0:9141
 ExitRelay 0
 ExitPolicy reject *:*
 ExitPolicy reject6 *:*
-
+GeoIPFile /usr/share/tor/geoip
+GeoIPv6File /usr/share/tor/geoip6
+DataDirectory /etc/tor
 
 
 UseBridges 1
