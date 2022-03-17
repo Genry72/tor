@@ -1,7 +1,7 @@
 #!/bin/bash
 export APP_NAME="Dockovpn"
-export APP_INSTALL_PATH =/opt/$(APP_NAME)
-export APP_PERSIST_DIR=/opt/$(APP_NAME)_data
+export APP_INSTALL_PATH =/opt/$APP_NAME
+export APP_PERSIST_DIR=/opt/$APP_NAME_data
 source ./functions.sh
 
 mkdir -p /dev/net
