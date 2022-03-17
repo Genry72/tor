@@ -28,7 +28,7 @@ cd "$APP_PERSIST_DIR"
 
 LOCKFILE=.gen
 
-# Regenerate certs only on the first start 
+# Regenerate certs only on the first start
 if [ ! -f $LOCKFILE ]; then
 
     /usr/share/easy-rsa/easyrsa build-ca nopass << EOF
@@ -72,6 +72,7 @@ openvpn --config /etc/openvpn/server.conf &
 echo " "
 
 # Generate client config
+chmod +x genclient.sh
 ./genclient.sh $@
 
 tail -f /dev/null
