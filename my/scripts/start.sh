@@ -1,5 +1,5 @@
 #!/bin/bash
-
+chmod +x functions.sh
 source ./functions.sh
 
 mkdir -p /dev/net
@@ -72,7 +72,6 @@ openvpn --config /etc/openvpn/server.conf &
 echo " "
 
 # Generate client config
-chmod +x genclient.sh
 ./genclient.sh $@
 
 tail -f /dev/null
