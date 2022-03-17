@@ -46,7 +46,6 @@ RUN mkdir -p /opt/Dockovpn_data && \
     cd /opt/Dockovpn && \
     cp config/server.conf /etc/openvpn/server.conf &&\
     groupadd nobody
-RUN ./start.sh
 
 VOLUME [ "/opt/Dockovpn_data" ]
 CMD ["/usr/bin/supervisord"]
