@@ -1,0 +1,54 @@
+FROM ubuntu:20.04
+ENV APP_NAME Dockovpn
+ENV APP_INSTALL_PATH /opt/${APP_NAME}
+ENV APP_PERSIST_DIR /opt/${APP_NAME}_data
+COPY iptables.rules /etc/iptables.rules
+COPY iptables /etc/network/if-up.d/iptables
+WORKDIR ${APP_INSTALL_PATH}
+
+COPY scripts .
+COPY config ./config
+COPY VERSION ./config
+RUN apt update &&\
+    apt install -y\
+    tzdata \
+    iptables \
+    openvpn easy-rsa bash netcat-openbsd zip dumb-init && \
+    ln -fs /usr/share/zoneinfo/Europe/Moscow /etc/localtime &&\
+    dpkg-reconfigure -f noninteractive tzdata &&\
+    # chmod +x /iptables.sh &&\
+    chmod +x /etc/network/if-up.d/iptables
+RUN apt install -y \
+    curl \
+    net-tools mc telnet vim iputils-ping \
+    tor \
+    tor-geoipdb \
+ #   privoxy \
+ #   squid3 \
+     \
+    supervisor \
+    obfs4proxy &&\
+    rm -rf /var/lib/apt/lists/*
+COPY torrc /etc/tor/torrc
+#COPY privoxy.conf /etc/privoxy/config
+#COPY squid.conf /etc/squid/squid.conf
+#COPY redirect-to-tor.txt /etc/squid/redirect-to-tor.dat
+# supervisor config
+COPY supervisor.conf /etc/supervisor/conf.d/tor_proxy.conf
+##Конфижим openvpn
+RUN mkdir -p ${APP_PERSIST_DIR} && \
+    cd ${APP_PERSIST_DIR} && \
+    /usr/share/easy-rsa/easyrsa init-pki && \
+    /usr/share/easy-rsa/easyrsa gen-dh && \
+    # DH parameters of size 2048 created at /usr/share/easy-rsa/pki/dh.pem
+    # Copy DH file
+    cp pki/dh.pem /etc/openvpn && \
+    # Copy FROM ./scripts/server/conf TO /etc/openvpn/server.conf in DockerFile
+    cd ${APP_INSTALL_PATH} && \
+    cp config/server.conf /etc/openvpn/server.conf &&\
+    groupadd nobody
+EXPOSE 1194/udp
+EXPOSE 8080/tcp
+
+VOLUME [ "/opt/Dockovpn_data" ]
+CMD ["/usr/bin/supervisord"]
