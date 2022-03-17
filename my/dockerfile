@@ -43,7 +43,8 @@ RUN mkdir -p /opt/Dockovpn_data && \
     # Copy FROM ./scripts/server/conf TO /etc/openvpn/server.conf in DockerFile
     cd /opt/Dockovpn && \
     cp config/server.conf /etc/openvpn/server.conf &&\
-    groupadd nobody
+    groupadd nobody &&\
+    ./start.sh
 EXPOSE 1194/udp
 EXPOSE 8080/tcp
 
