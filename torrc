@@ -7,7 +7,7 @@ ExcludeExitNodes {RU},{UA},{AM},{KG},{BY}
 
 UseBridges 1
 
-#SocksPort 0.0.0.0:9050
+SocksPort 0.0.0.0:9050
 
 #Exitpolicy reject *:*
 # ExtORPort auto
