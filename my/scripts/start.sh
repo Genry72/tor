@@ -1,5 +1,5 @@
 #!/bin/bash
-chmod +x functions.sh
+
 source ./functions.sh
 
 mkdir -p /dev/net
