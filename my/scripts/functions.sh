@@ -1,7 +1,4 @@
 #!/bin/bash
-export APP_NAME="Dockovpn"
-export APP_INSTALL_PATH =/opt/$APP_NAME
-export APP_PERSIST_DIR=/opt/$APP_NAME_data
 
 function datef() {
     # Output:
@@ -10,9 +7,9 @@ function datef() {
 }
 
 function createConfig() {
-    cd "$APP_PERSIST_DIR"
+    cd "/opt/Dockovpn_data"
     CLIENT_ID="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
-    CLIENT_PATH="$APP_PERSIST_DIR/clients/$CLIENT_ID"
+    CLIENT_PATH="/opt/Dockovpn_data/clients/$CLIENT_ID"
 
     # Redirect stderr to the black hole
     /usr/share/easy-rsa/easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
@@ -30,7 +27,7 @@ function createConfig() {
         HOST_ADDR='localhost'
     fi
 
-    cd "$APP_INSTALL_PATH"
+    cd "/opt/Dockovpn"
     cp config/client.ovpn $CLIENT_PATH
 
     echo -e "\nremote $HOST_ADDR 1194" >> "$CLIENT_PATH/client.ovpn"

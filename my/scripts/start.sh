@@ -1,7 +1,4 @@
 #!/bin/bash
-export APP_NAME="Dockovpn"
-export APP_INSTALL_PATH =/opt/$APP_NAME
-export APP_PERSIST_DIR=/opt/$APP_NAME_data
 source ./functions.sh
 
 mkdir -p /dev/net
@@ -26,7 +23,7 @@ iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
 
-cd "$APP_PERSIST_DIR"
+cd "/opt/Dockovpn_data"
 
 LOCKFILE=.gen
 
@@ -62,10 +59,10 @@ fi
 # Copy server keys and certificates
 cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key ta.key /etc/openvpn
 
-cd "$APP_INSTALL_PATH"
+cd "/opt/Dockovpn"
 
 # Print app version
-$APP_INSTALL_PATH/version.sh
+/opt/Dockovpn/version.sh
 
 # Need to feed key password
 openvpn --config /etc/openvpn/server.conf &
