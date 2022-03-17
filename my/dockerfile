@@ -33,6 +33,8 @@ COPY torrc /etc/tor/torrc
 # supervisor config
 COPY supervisor.conf /etc/supervisor/conf.d/tor_proxy.conf
 ##Конфижим openvpn
+EXPOSE 1194/udp
+EXPOSE 8080/tcp
 RUN mkdir -p /opt/Dockovpn_data && \
     cd /opt/Dockovpn_data && \
     /usr/share/easy-rsa/easyrsa init-pki && \
@@ -43,10 +45,8 @@ RUN mkdir -p /opt/Dockovpn_data && \
     # Copy FROM ./scripts/server/conf TO /etc/openvpn/server.conf in DockerFile
     cd /opt/Dockovpn && \
     cp config/server.conf /etc/openvpn/server.conf &&\
-    groupadd nobody &&\
-    ./start.sh
-EXPOSE 1194/udp
-EXPOSE 8080/tcp
+    groupadd nobody
+RUN ./start.sh
 
 VOLUME [ "/opt/Dockovpn_data" ]
 CMD ["/usr/bin/supervisord"]
