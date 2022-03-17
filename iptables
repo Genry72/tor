@@ -1,0 +1,12 @@
+#!/bin/bash
+#Проверяем корректность страта тора и применяем правила iptables
+for ((;;))
+do
+curl --socks5 localhost:9050 --socks5-hostname localhost:9050 -s https://check.torproject.org/api/ip > /dev/null
+if [ $? -eq 0 ]; then
+    /sbin/iptables-restore < /etc/iptables.rules
+    exit
+else
+    echo "Offline"
+fi
+done
