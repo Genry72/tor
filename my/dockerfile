@@ -1,8 +1,6 @@
 FROM ubuntu:20.04
-COPY iptables.rules /etc/iptables.rules
 COPY iptables /etc/network/if-up.d/iptables
 WORKDIR /opt/Dockovpn
-COPY iptables.sh ./iptables.sh
 COPY scripts .
 COPY config ./config
 COPY VERSION ./config
@@ -10,14 +8,14 @@ RUN apt update &&\
     apt install -y\
     tzdata \
     iptables \
+    ipset \
     openvpn easy-rsa bash netcat-openbsd zip dumb-init && \
     ln -fs /usr/share/zoneinfo/Europe/Moscow /etc/localtime &&\
     dpkg-reconfigure -f noninteractive tzdata &&\
-    # chmod +x /iptables.sh &&\
     chmod +x /etc/network/if-up.d/iptables
 RUN apt install -y \
-    curl \
-    net-tools mc telnet vim iputils-ping \
+    # curl \
+    # net-tools mc telnet vim iputils-ping \
     tor \
     tor-geoipdb \
  #   privoxy \
@@ -27,6 +25,7 @@ RUN apt install -y \
     obfs4proxy &&\
     rm -rf /var/lib/apt/lists/*
 COPY torrc /etc/tor/torrc
+COPY blocektip.txt ./blocektip.txt
 #COPY privoxy.conf /etc/privoxy/config
 #COPY squid.conf /etc/squid/squid.conf
 #COPY redirect-to-tor.txt /etc/squid/redirect-to-tor.dat
