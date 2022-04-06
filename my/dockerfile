@@ -15,7 +15,7 @@ RUN apt update &&\
     dpkg-reconfigure -f noninteractive tzdata &&\
     chmod +x /etc/network/if-up.d/iptables
 RUN apt install -y \
-    # curl \
+    curl \
     # net-tools mc telnet vim iputils-ping \
     tor \
     tor-geoipdb \
