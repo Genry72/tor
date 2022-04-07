@@ -16,7 +16,7 @@ RUN apt update &&\
     chmod +x /etc/network/if-up.d/iptables
 RUN apt install -y \
     curl \
-    # net-tools mc telnet vim iputils-ping \
+    # net-tools mc telnet vim iputils-ping dnsutils \
     tor \
     tor-geoipdb \
  #   privoxy \
