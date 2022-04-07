@@ -39,9 +39,10 @@ iptables -t nat -A PREROUTING -i tun0 -p tcp -m set --match-set blacklist dst -j
 iptables -t nat -A OUTPUT -p tcp -m set --match-set blacklist dst -j REDIRECT --to-port 9040
 #По дефолту все идет мимо тора
 iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
-#Собираем списки запрещенки.
-iplist_data=$(cat blocektip.txt)
-for row_data in $iplist_data; do ipset -A blacklist ${row_data}; done
+#Загружаем списки запрещенки.
+cat blocektip.txt | while read CMD; do ipset -A blacklist $CMD; done
+# iplist_data=$(cat blocektip.txt)
+# for row_data in $iplist_data; do ipset -A blacklist ${row_data}; done
 
 ##Ниже правила чтобы пускать все через тор
 #Удаляем все правила
